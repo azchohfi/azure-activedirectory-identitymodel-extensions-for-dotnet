@@ -1174,7 +1174,7 @@ namespace Microsoft.IdentityModel.JsonWebTokens
                 {
                     if (TokenUtilities.IsRecoverableConfiguration(validationParameters, currentConfiguration, out currentConfiguration))
                     {
-                        validationParameters.ValidateIssuerWithLKG = true;
+                        validationParameters.ValidateWithLKG = true;
                         tokenValidationResult = decryptedJwt != null ? ValidateJWE(outerToken, decryptedJwt, validationParameters, currentConfiguration) : ValidateJWS(token, validationParameters, currentConfiguration);
 
                         if (tokenValidationResult.IsValid)
@@ -1194,7 +1194,7 @@ namespace Microsoft.IdentityModel.JsonWebTokens
                         // Only try to re-validate using the newly obtained config if it doesn't reference equal the previously used configuration.
                         if (lastConfig != currentConfiguration)
                         {
-                            validationParameters.ValidateIssuerWithLKG = false;
+                            validationParameters.ValidateWithLKG = false;
                             return decryptedJwt != null ? ValidateJWE(outerToken, decryptedJwt, validationParameters, currentConfiguration) : ValidateJWS(token, validationParameters, currentConfiguration);
                         }
                     }
